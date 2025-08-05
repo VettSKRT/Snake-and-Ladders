@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ular Tangga 4 Pemain</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>🎲 Ular Tangga Buatan Sendiri Coy</h1>
+  <div id="main-container">
+    <div id="left-panel">
+      <div id="game-info">
+        <p>Giliran: <span id="turn" class="turn-highlight">Pemain 1</span></p>
+      </div>
+      <div id="board-container">
+        <img src="board.png" id="board-img" />
+        <div id="pawns-container"></div>
+      </div>
+    </div>
+    <div id="right-panel">
+      <h3>🎲 Kontrol Game</h3>
+      <img id="dice-img" src="dice/dice-1.png" alt="Dice" />
+      <p>Hasil Dadu: <span id="dice">-</span></p>
+      <button onclick="rollDice()">🎲 Lempar Dadu</button>
+      <button onclick="startGame()">🔄 Restart Game</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
