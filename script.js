@@ -13,7 +13,7 @@ const playerColors = {
   1: { background: 'linear-gradient(45deg, #e74c3c, #c0392b)', boxShadow: '0 4px 12px rgba(231, 76, 60, 0.6)' },
   2: { background: 'linear-gradient(45deg, #3498db, #2980b9)', boxShadow: '0 4px 12px rgba(52, 152, 219, 0.6)' },
   3: { background: 'linear-gradient(45deg, #2ecc71, #27ae60)', boxShadow: '0 4px 12px rgba(46, 204, 113, 0.6)' },
-  4: { background: 'linear-gradient(45deg, #9b59b6, #8e44ad)', boxShadow: '0 4px 12px rgba(155, 89, 182, 0.6)' },
+  4: { background: 'linear-gradient(45deg, #caed2b, #caed2b)', boxShadow: '0 4px 12px rgba(202, 237, 43, 0.6)' },
   5: { background: 'linear-gradient(45deg, #f39c12, #e67e22)', boxShadow: '0 4px 12px rgba(243, 156, 18, 0.6)' },
   6: { background: 'linear-gradient(45deg, #1abc9c, #16a085)', boxShadow: '0 4px 12px rgba(26, 188, 156, 0.6)' }
 };
@@ -23,7 +23,7 @@ const playerBoxColors = {
   1: 'linear-gradient(45deg, #e74c3c, #c0392b)',
   2: 'linear-gradient(45deg, #3498db, #2980b9)',
   3: 'linear-gradient(45deg, #2ecc71, #27ae60)',
-  4: 'linear-gradient(45deg, #9b59b6, #8e44ad)',
+  4: 'linear-gradient(45deg, #caed2b, #caf411)',
   5: 'linear-gradient(45deg, #f39c12, #e67e22)',
   6: 'linear-gradient(45deg, #1abc9c, #16a085)'
 };

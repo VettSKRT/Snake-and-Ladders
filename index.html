@@ -30,11 +30,8 @@
   
   <div id="main-container">
     <div id="left-panel">
-      <div id="game-info">
-        <p>Giliran: <span id="turn" class="turn-highlight">Pemain 1</span></p>
-      </div>
       <div id="board-container">
-        <img src="board sadis.png" id="board-img" />
+        <img src="board polos.png" id="board-img" />
         <div id="pawns-container"></div>
       </div>
     </div>
@@ -44,6 +41,11 @@
       <p>Hasil Dadu: <span id="dice">-</span></p>
       <button onclick="rollDice()">🎲 Lempar Dadu</button>
       <button onclick="startGame()">🔄 Mulai Game</button>
+      
+      <!-- Box Giliran dipindah ke sini -->
+      <div id="game-info">
+        <p>Giliran: <span id="turn" class="turn-highlight">Pemain 1</span></p>
+      </div>
     </div>
   </div>
   <script src="script.js"></script>
