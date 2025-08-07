@@ -60,7 +60,15 @@ h1 {
 }
 
 #game-info.player-4 {
-  background: linear-gradient(45deg, #9b59b6, #8e44ad);
+  background: linear-gradient(45deg, #cef700, #cef700);
+}
+
+#game-info.player-5 {
+  background: linear-gradient(45deg, #f39c12, #e67e22);
+}
+
+#game-info.player-6 {
+  background: linear-gradient(45deg, #1abc9c, #16a085);
 }
 
 .turn-highlight {
@@ -198,8 +206,8 @@ button:last-of-type:hover {
   box-shadow: 0 4px 12px rgba(46, 204, 113, 0.6);
 }
 .p4 { 
-  background: linear-gradient(45deg, #9b59b6, #8e44ad);
-  box-shadow: 0 4px 12px rgba(155, 89, 182, 0.6);
+  background: linear-gradient(45deg, #cef700, #cef700);
+  box-shadow: 0 4px 12px rgba(225, 255, 0, 0.6);
 }
 .p5 { 
   background: linear-gradient(45deg, #f39c12, #e67e22);

@@ -7,13 +7,34 @@
 </head>
 <body>
   <h1>🎲 Ular Tangga Buatan Sendiri Coy</h1>
+  
+  <!-- Tombol untuk memilih jumlah pemain -->
+  <div style="text-align: center; margin-bottom: 30px;">
+    <button onclick="window.location.href='player-select.html'" style="
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      background: linear-gradient(45deg, #9b59b6, #8e44ad);
+      color: white;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 10px;
+      box-shadow: 0 4px 15px rgba(155, 89, 182, 0.4);
+    " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(155, 89, 182, 0.6)'" 
+       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(155, 89, 182, 0.4)'">
+      👥 Pilih Jumlah Pemain
+    </button>
+  </div>
+  
   <div id="main-container">
     <div id="left-panel">
       <div id="game-info">
         <p>Giliran: <span id="turn" class="turn-highlight">Pemain 1</span></p>
       </div>
       <div id="board-container">
-        <img src="board.png" id="board-img" />
+        <img src="board sadis.png" id="board-img" />
         <div id="pawns-container"></div>
       </div>
     </div>
@@ -22,7 +43,7 @@
       <img id="dice-img" src="dice/dice-1.png" alt="Dice" />
       <p>Hasil Dadu: <span id="dice">-</span></p>
       <button onclick="rollDice()">🎲 Lempar Dadu</button>
-      <button onclick="startGame()">🔄 Restart Game</button>
+      <button onclick="startGame()">🔄 Mulai Game</button>
     </div>
   </div>
   <script src="script.js"></script>

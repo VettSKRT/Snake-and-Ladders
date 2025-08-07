@@ -3,24 +3,30 @@ const turnDisplay = document.getElementById("turn");
 const pawnsContainer = document.getElementById("pawns-container");
 const diceImg = document.getElementById("dice-img");
 
-let players = [
-  { id: 1, pos: 1, el: null },
-  { id: 2, pos: 1, el: null },
-  { id: 3, pos: 1, el: null },
-  { id: 4, pos: 1, el: null },
-];
-
+let players = [];
 let currentPlayer = 0;
 let bonusTurn = false; // Untuk melacak bonus jalan jika dapat 6
+let playerCount = 4; // Default 4 pemain
 
-// Inisialisasi pion
-players.forEach(p => {
-  const pawn = document.createElement("div");
-  pawn.classList.add("player", `p${p.id}`);
-  pawnsContainer.appendChild(pawn);
-  p.el = pawn;
-  updatePosition(p, 1);
-});
+// Warna untuk semua pemain
+const playerColors = {
+  1: { background: 'linear-gradient(45deg, #e74c3c, #c0392b)', boxShadow: '0 4px 12px rgba(231, 76, 60, 0.6)' },
+  2: { background: 'linear-gradient(45deg, #3498db, #2980b9)', boxShadow: '0 4px 12px rgba(52, 152, 219, 0.6)' },
+  3: { background: 'linear-gradient(45deg, #2ecc71, #27ae60)', boxShadow: '0 4px 12px rgba(46, 204, 113, 0.6)' },
+  4: { background: 'linear-gradient(45deg, #9b59b6, #8e44ad)', boxShadow: '0 4px 12px rgba(155, 89, 182, 0.6)' },
+  5: { background: 'linear-gradient(45deg, #f39c12, #e67e22)', boxShadow: '0 4px 12px rgba(243, 156, 18, 0.6)' },
+  6: { background: 'linear-gradient(45deg, #1abc9c, #16a085)', boxShadow: '0 4px 12px rgba(26, 188, 156, 0.6)' }
+};
+
+// Warna untuk box game info
+const playerBoxColors = {
+  1: 'linear-gradient(45deg, #e74c3c, #c0392b)',
+  2: 'linear-gradient(45deg, #3498db, #2980b9)',
+  3: 'linear-gradient(45deg, #2ecc71, #27ae60)',
+  4: 'linear-gradient(45deg, #9b59b6, #8e44ad)',
+  5: 'linear-gradient(45deg, #f39c12, #e67e22)',
+  6: 'linear-gradient(45deg, #1abc9c, #16a085)'
+};
 
 // Snake & Ladder
 const snakesAndLadders = {
@@ -36,13 +42,51 @@ const snakesAndLadders = {
   80: 99,
   27: 9,
   17: 4,
+  28: 11,
   54: 32,
   74: 69,
   87: 26,
   93: 72,
   95: 76,
   97: 78,
+  83: 2,
 };
+
+function initializePlayers() {
+  // Ambil jumlah pemain dari localStorage
+  const storedPlayerCount = localStorage.getItem('playerCount');
+  if (storedPlayerCount) {
+    playerCount = parseInt(storedPlayerCount);
+  }
+  
+  // Bersihkan container pion
+  pawnsContainer.innerHTML = '';
+  
+  // Buat array pemain sesuai jumlah yang dipilih
+  players = [];
+  for (let i = 1; i <= playerCount; i++) {
+    players.push({ id: i, pos: 1, el: null });
+  }
+  
+  // Inisialisasi pion
+  players.forEach(p => {
+    const pawn = document.createElement("div");
+    pawn.classList.add("player", `p${p.id}`);
+    pawnsContainer.appendChild(pawn);
+    p.el = pawn;
+    
+    // Set warna pion sesuai pemain
+    const color = playerColors[p.id];
+    if (color) {
+      pawn.style.background = color.background;
+      pawn.style.boxShadow = color.boxShadow;
+    }
+    
+    updatePosition(p, 1);
+  });
+  
+  console.log(`Game dimulai dengan ${playerCount} pemain`);
+}
 
 function rollDice() {
   // Tambahkan efek rolling pada dadu - lebih ringan
@@ -126,6 +170,28 @@ function checkBonusTurn(dice) {
   }
 }
 
+function nextTurn() {
+  if (!bonusTurn) {
+    currentPlayer = (currentPlayer + 1) % playerCount;
+  }
+  updateTurnDisplay();
+}
+
+function updateTurnDisplay() {
+  turnDisplay.textContent = "Pemain " + (currentPlayer + 1);
+  
+  // Update warna box sesuai pemain
+  const gameInfo = document.getElementById('game-info');
+  gameInfo.className = ''; // Reset semua class
+  gameInfo.classList.add(`player-${currentPlayer + 1}`);
+  
+  // Set background color secara dinamis
+  const boxColor = playerBoxColors[currentPlayer + 1];
+  if (boxColor) {
+    gameInfo.style.background = boxColor;
+  }
+}
+
 function animateMove(player, from, to, callback) {
   if (from === to) return callback();
   
@@ -176,38 +242,13 @@ function getXY(pos) {
   };
 }
 
-function nextTurn() {
-  if (!bonusTurn) {
-    currentPlayer = (currentPlayer + 1) % 4;
-  }
-  updateTurnDisplay();
-}
-
-function updateTurnDisplay() {
-  turnDisplay.textContent = "Pemain " + (currentPlayer + 1);
-  
-  // Update warna box sesuai pemain
-  const gameInfo = document.getElementById('game-info');
-  gameInfo.className = ''; // Reset semua class
-  gameInfo.classList.add(`player-${currentPlayer + 1}`);
-}
-
 function startGame() {
   currentPlayer = 0;
   bonusTurn = false;
-  players.forEach(p => {
-    p.pos = 1;
-    updatePosition(p, 1);
-  });
+  initializePlayers();
   updateTurnDisplay();
   diceDisplay.textContent = "-";
   diceImg.src = "dice/dice-1.png";
-  
-  // Tambahkan efek visual untuk start game
-  const mainContainer = document.getElementById('main-container');
-  mainContainer.style.animation = 'none';
-  mainContainer.offsetHeight; // Trigger reflow
-  mainContainer.style.animation = 'pulse 0.5s ease-in-out';
 }
 
 function checkWin(player) {
@@ -220,3 +261,9 @@ function checkWin(player) {
   }
   return false;
 }
+
+// Inisialisasi game saat halaman dimuat
+document.addEventListener('DOMContentLoaded', function() {
+  initializePlayers();
+  updateTurnDisplay();
+});
